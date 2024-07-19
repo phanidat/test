@@ -2,6 +2,7 @@ package controller
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"net/http"
 
@@ -12,6 +13,19 @@ import (
 
 	"git.kasikornline.com/pdf-decrypt/internal/models"
 )
+
+func GetBook(c *gin.Context) {
+
+	response := models.Book{
+		Name:   "Randy",
+		Title:  "Book 1",
+		Author: "Randy",
+	}
+	c.Writer.Header().Set("Content-Type", "application/json")
+	c.Writer.WriteHeader(http.StatusOK)
+
+	json.NewEncoder(c.Writer).Encode(response)
+}
 
 func DecryptPdfFile(c *gin.Context) {
 
